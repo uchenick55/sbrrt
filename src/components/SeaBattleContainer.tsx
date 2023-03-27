@@ -7,8 +7,18 @@ type SeaBattleContainerType = {
 }
 const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({setFire}) => {
     useEffect(()=>{
-        setFire("12")
+        fireGuess("12")
     },[])
+
+    type fireGuessType = (guess: string) =>void
+    const fireGuess:fireGuessType = (guess)  => {
+        setFire(guess)
+    }
+
+
+
+
+
     return <div>
         333
     </div>
