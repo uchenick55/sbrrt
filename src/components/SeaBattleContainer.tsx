@@ -1,37 +1,45 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {GlobalStateType} from "../redux/store-redux";
-import {setFire} from "../redux/data-reducer";
+import {processGuess} from "../functions/processGuess";
+import {ShipType} from "../Types/commonTypes";
 type SeaBattleContainerType = {
-    setFire: (guess: string) => void
+    boardSize: number,
+    ships:Array<ShipType>,
+    shipsSunk: number,
+    numShips:number
 }
-const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({setFire}) => {
+const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({boardSize, ships, shipsSunk,numShips}) => {
     useEffect(()=>{
-        fireGuess("12")
+        processGuessLocal("A6")
     },[])
 
-    type fireGuessType = (guess: string) =>void
-    const fireGuess:fireGuessType = (guess)  => {
-        setFire(guess)
+    type processGuessLocalType = (guess: string)  => void
+        // локальная функция, принимающая только координаты выстрела
+    const processGuessLocal:processGuessLocalType = (guess) => {
+        processGuess(guess, boardSize, ships, shipsSunk, numShips)
     }
-
-
-
-
 
     return <div>
         333
     </div>
 }
-type mapStateToPropsType = {
+
+type mapDispatchToPropsType = {
 
 }
-type mapDispatchToPropsType = {
-    setFire: (guess: string) => void
+type mapStateToPropsType = {
+    boardSize: number,
+    ships:Array<ShipType>,
+    shipsSunk: number,
+    numShips:number
 }
 const mapStateToProps = (state: GlobalStateType) => {
     return {
-
+        boardSize: state.mainData.boardSize,
+        ships: state.mainData.ships,
+        shipsSunk: state.mainData.shipsSunk,
+        numShips: state.mainData.numShips
     }
 }
 export default connect<
@@ -40,6 +48,5 @@ export default connect<
     unknown, // тип входящих пропсов от родителя
     GlobalStateType // глобальный стейт из стора
     >(mapStateToProps, {
-    setFire// отправить координаты выстрела на проверку попадания
 })(SeaBattleContainer)
 
