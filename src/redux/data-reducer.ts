@@ -1,28 +1,39 @@
 
 import {ShipType} from "../Types/commonTypes";
 
+type isSunkType = (
+    ship: any,
+) => boolean
+
+const isSunk:isSunkType = (ship)=> { // корабль потоплен?
+    for (var i = 0; i <= ship.hits.length; i++) {// пробегаем по массиву hits выбранного корабля
+        if (ship.hits[i] === "") { // если хотя бы одну часть корабля не попали,
+            return false // возвращаем false (корабль не поттоплен)
+        }
+    }
+    return true // иначе возвращаем true (проверяемый корабль потоплен)
+}
+
 type fireType = (
-    uess: any,
+    guess: string,
     ships:Array<ShipType>,
-    isSunk: (ship:ShipType)=>boolean,
     shipsSunk: number
 ) => boolean
 
-const fire:fireType = (guess, ships, isSunk, shipsSunk) => { // проверка попадания по выбранному полю
+export const fire:fireType = (guess, ships, shipsSunk) => { // проверка попадания по выбранному полю
     for (var i = 0; i < ships.length; i++) { // пробегаем массив ships
         var ship = ships[i]; // получить данные по текущему кораблю
         var locationIndex = ship.locations.indexOf(guess); // поиск guess в массиве позиций кораблей
         if (locationIndex >= 0) { //    если совпадает с одним из полей и попадание не повторно
             if ( ship.hits[locationIndex] === "hit") { // если эта часть корабля уже была потоплена раньше
-                // view.displayMessage("Эта часть корабля уже была потоплена")
+                console.log("Эта часть корабля уже была потоплена")
                 return false // прервать выполнение функции
             }
             ship.hits[locationIndex] = "hit"; // присвоить соответствующему полю hits
-            //  view.displayHit(guess)// отобразить попадания в корабли
-            //  view.displayMessage("HIT")
+            console.log(guess)// отобразить попадания в корабли
+            console.log("HIT")
             if (isSunk(ship)) { // если корабль потоплен (вернет true)
-                //    ships[i].isSunk=true
-                //    view.displayMessage("You sank my battleship!")
+                console.log("You sank my battleship!")
                 shipsSunk++; // увеличиваем счетчик потопленых корабелей на 1
             }
             return true // вернуть подтвержение попадание
@@ -36,7 +47,7 @@ const fire:fireType = (guess, ships, isSunk, shipsSunk) => { // проверка
 
 const FIRE = "sbrrt/dataReducer/FIRE"; //константа выстрела
 
-type fireActionType = { type: typeof FIRE, guess: string}
+export type fireActionType = { type: typeof FIRE, guess: string}
 export const setFire = (guess: string): fireActionType => { // экшн получения данных выстрела
     return {type: FIRE, guess}
 };
@@ -67,7 +78,7 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
     let stateCopy: initialStateType; // объявлениечасти части стейта до изменения редьюсером
     switch (action.type) {
         case FIRE:  // кейс задания ошибок формы
-
+            console.log("FIRE!", action.guess)
             stateCopy = {
                 ...state, // копия всего стейта
             }
