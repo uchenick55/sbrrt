@@ -17,6 +17,6 @@ export const processGuess:processGuessType = (guess,boardSize, ships, shipsSunk,
         const hit = fire(location, ships, shipsSunk) // стреляем по введенным координатам
         if (hit && shipsSunk === numShips) { // если попали, и количество потопленных кораблей достигла порога
             console.log("Вы потопили все корабли") // сообщение о потоплении всех кораблей
-        }/**/
+        }
     }
 }

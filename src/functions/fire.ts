@@ -7,7 +7,8 @@ type fireType = (
     shipsSunk: number
 ) => boolean
 
-export const fire:fireType = (guess, ships, shipsSunk) => { // проверка попадания по выбранному полю
+export const fire:fireType = (guess, ships, shipsSunk) => {
+    // проверка попадания по выбранному полю
     for (let i = 0; i < ships.length; i++) { // пробегаем массив ships
         const ship = ships[i]; // получить данные по текущему кораблю
         const locationIndex = ship.locations.indexOf(guess); // поиск guess в массиве позиций кораблей

@@ -1,15 +1,6 @@
 
 import {ShipType} from "../Types/commonTypes";
 
-
-
-
-
-
-
-
-
-
 const FIRE = "sbrrt/dataReducer/FIRE"; //константа выстрела
 
 export type fireActionType = { type: typeof FIRE, guess: string}
