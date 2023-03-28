@@ -33,12 +33,13 @@ type initialStateType = {
 }
 const initialState: initialStateType = { //стейт по умолчанию
     boardSize:7,// размер клеток поля
-    numShips: 3,// количество кораблей
+    numShips: 4,// количество кораблей
     shipLength: 3,//длина кораблей
     shipsSunk:0, // сколько кораблей уже потоплено
     ships: [ // данные по кораблям (положение на поле и массивы попаданий)
         { locations: ["06", "16", "26"], hits: ["", "", ""] },
         { locations: ["24", "34", "44"], hits: ["", "", ""] },
+        { locations: ["10", "11", "12"], hits: ["", "", ""] },
         { locations: ["10", "11", "12"], hits: ["", "", ""] }
     ],
     currentStatus: ""

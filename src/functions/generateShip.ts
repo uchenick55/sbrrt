@@ -1,8 +1,9 @@
+import {ShipType} from "../Types/commonTypes";
 
 type generateShipType = (
     boardSizeL: number,
     shipLength: number
-) => Array<string>
+) => ShipType
 
 export const generateShip:generateShipType = (boardSize, shipLength) => {
     //метод создает один корабль, находящийся в произвольном месте игрового
@@ -18,13 +19,16 @@ export const generateShip:generateShipType = (boardSize, shipLength) => {
         col = Math.floor(Math.random()*boardSize); // в любой колонке из boardSize
         //console.log("Вертикально", row, col)
     }
-    const newShipLocations = []; // массив позиций корабля (пока пустой)
+    const locations:Array<string> = []; // массив позиций корабля (пока пустой)
+    const hits:Array<""|"hit"> = []; // массив попаданий в корабль (пока пустой)
     for (let i = 0; i< shipLength; i++) {// цикл до длины корабля
         if (direction === 1) { // сформировать позиции горизонтального корабля
-            newShipLocations.push(row + "" + (col + i))
+            locations.push(row + "" + (col + i))
         } else { // сформировать позиции вертикального корабля
-            newShipLocations.push((row  + i)  + "" + col)
+            locations.push((row  + i)  + "" + col)
         }
+        hits.push("")
     }
-    return newShipLocations // возврат сгенерированных позиций корабля
+   // console.log({locations, hits})
+    return {locations, hits} // возврат сгенерированных позиций корабля
 }
