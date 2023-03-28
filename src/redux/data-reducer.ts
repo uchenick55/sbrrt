@@ -15,9 +15,9 @@ export const setStatus = (currentStatus: string): setStatusActionType => { // э
 };
 const SET_SHIPS_SUNK = "sbrrt/dataReducer/SET_SHIPS_SUNK"; //константа задания количества потопленых кораблей
 
-export type setShipsSunkActionType = { type: typeof SET_SHIPS_SUNK, shipsSunk:number}
-export const setShipsSunk = (shipsSunk:number): setShipsSunkActionType => { // экшн задания статуса текущего хода
-    return {type: SET_SHIPS_SUNK, shipsSunk}
+export type setShipsSunkActionType = { type: typeof SET_SHIPS_SUNK}
+export const setShipsSunk = (): setShipsSunkActionType => { // экшн увеличения количества потопленых кораблей
+    return {type: SET_SHIPS_SUNK}
 };
 
 type ActionTypes = fireActionType | setStatusActionType | setShipsSunkActionType
@@ -48,23 +48,23 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
     let stateCopy: initialStateType; // объявлениечасти части стейта до изменения редьюсером
     switch (action.type) {
         case FIRE:  // кейс задания ошибок формы
-           // console.log("FIRE!", action.guess)
+            console.log("FIRE!", action.guess)
             stateCopy = {
                 ...state, // копия всего стейта
             }
             return stateCopy; // возврат копии стейта после изменения
         case SET_STATUS:  // кейс задания статуса игры
-           // console.log("SET_STATUS", action.currentStatus)
+            console.log("SET_STATUS", action.currentStatus)
             stateCopy = {
                 ...state, // копия всего стейта
                 currentStatus: action.currentStatus
             }
             return stateCopy; // возврат копии стейта после изменения
         case SET_SHIPS_SUNK:  // кейс увеличения количества потопленых кораблей
-           // console.log("SET_SHIPS_SUNK", action.shipsSunk)
+            console.log("SET_SHIPS_SUNK")
             stateCopy = {
                 ...state, // копия всего стейта
-                shipsSunk: action.shipsSunk
+                shipsSunk: state.shipsSunk + 1
             }
             return stateCopy; // возврат копии стейта после изменения
         default:

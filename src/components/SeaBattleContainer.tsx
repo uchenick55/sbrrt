@@ -18,6 +18,12 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({boardSize, ships,
         processGuessLocal("A6")
         processGuessLocal("B6")
         processGuessLocal("C6")
+        processGuessLocal("C4")
+        processGuessLocal("D4")
+        processGuessLocal("E4")
+        processGuessLocal("B0")
+/*        processGuessLocal("B1")
+        processGuessLocal("B2")*/
     },[])
 
     type processGuessLocalType = (guess: string)  => void
@@ -27,7 +33,7 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({boardSize, ships,
     }
 
     return <div>
-        333
+        {shipsSunk}
     </div>
 }
 

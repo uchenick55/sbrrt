@@ -17,8 +17,7 @@ export const processGuess:processGuessType = (guess,boardSize, ships, shipsSunk,
     setStatus(guess)
     let location = parseGuess(guess, boardSize, setStatus) // проверить, что введенные данные в определенных границах
     if (location) { // если соответствует
-        //this.guesses++  счетчик выстрелов увеличиваем на 1 при кореектном вводе данных выстрела
-        const hit = fire(location, ships, shipsSunk, setStatus, setShipsSunk) // стреляем по введенным координатам
+        const hit = fire(location, ships, setStatus, setShipsSunk) // стреляем по введенным координатам
         if (hit && shipsSunk === numShips) { // если попали, и количество потопленных кораблей достигла порога
             setStatus("Вы потопили все корабли") // сообщение о потоплении всех кораблей
         }
