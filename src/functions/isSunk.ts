@@ -1,5 +1,7 @@
+import {ShipType} from "../Types/commonTypes";
+
 type isSunkType = (
-    ship: any,
+    ship: ShipType,
 ) => boolean
 
 export const isSunk:isSunkType = (ship)=> { // корабль потоплен?

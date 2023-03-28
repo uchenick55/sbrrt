@@ -7,6 +7,14 @@ export type fireActionType = { type: typeof FIRE, guess: string}
 export const setFire = (guess: string): fireActionType => { // экшн получения данных выстрела
     return {type: FIRE, guess}
 };
+
+const SET_GENERATED_SHIP  = "sbrrt/dataReducer/SET_GENERATED_SHIPS "; //константа задания сгенерированного корабля
+
+export type setGeneratedShipActionType  = { type: typeof SET_GENERATED_SHIP, generatedShip: ShipType}
+export const setGeneratedShip = (generatedShip: ShipType): setGeneratedShipActionType => { // экшн получения данных выстрела
+    return {type: SET_GENERATED_SHIP, generatedShip}
+};
+
 const SET_STATUS = "sbrrt/dataReducer/SET_STATUS"; //константа статуса игры
 
 export type setStatusActionType = { type: typeof SET_STATUS, currentStatus: string}
@@ -20,7 +28,7 @@ export const setShipsSunk = (): setShipsSunkActionType => { // экшн увел
     return {type: SET_SHIPS_SUNK}
 };
 
-type ActionTypes = fireActionType | setStatusActionType | setShipsSunkActionType
+type ActionTypes = fireActionType | setStatusActionType | setShipsSunkActionType | setGeneratedShipActionType
 
 type initialStateType = {
     boardSize: number,// размер клеток поля
@@ -33,15 +41,10 @@ type initialStateType = {
 }
 const initialState: initialStateType = { //стейт по умолчанию
     boardSize:7,// размер клеток поля
-    numShips: 4,// количество кораблей
+    numShips: 3,// количество кораблей
     shipLength: 3,//длина кораблей
     shipsSunk:0, // сколько кораблей уже потоплено
-    ships: [ // данные по кораблям (положение на поле и массивы попаданий)
-        { locations: ["06", "16", "26"], hits: ["", "", ""] },
-        { locations: ["24", "34", "44"], hits: ["", "", ""] },
-        { locations: ["10", "11", "12"], hits: ["", "", ""] },
-        { locations: ["10", "11", "12"], hits: ["", "", ""] }
-    ],
+    ships: [], // данные по кораблям (положение на поле и массивы попаданий)
     currentStatus: ""
 }
 
@@ -49,13 +52,13 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
     let stateCopy: initialStateType; // объявлениечасти части стейта до изменения редьюсером
     switch (action.type) {
         case FIRE:  // кейс задания ошибок формы
-            console.log("FIRE!", action.guess)
+            //console.log("FIRE!", action.guess)
             stateCopy = {
                 ...state, // копия всего стейта
             }
             return stateCopy; // возврат копии стейта после изменения
         case SET_STATUS:  // кейс задания статуса игры
-            console.log("SET_STATUS", action.currentStatus)
+           // console.log("SET_STATUS", action.currentStatus)
             stateCopy = {
                 ...state, // копия всего стейта
                 currentStatus: action.currentStatus
@@ -65,6 +68,13 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
             stateCopy = {
                 ...state, // копия всего стейта
                 shipsSunk: state.shipsSunk + 1
+            }
+            return stateCopy; // возврат копии стейта после изменения
+        case SET_GENERATED_SHIP:  // кейс загрузки очередного сгенерированного корабля
+           // console.log(action.generatedShip)
+            stateCopy = {
+                ...state, // копия всего стейта
+                ships: [...state.ships,action.generatedShip] // добавление новых сгенерированных кораблей
             }
             return stateCopy; // возврат копии стейта после изменения
         default:

@@ -17,5 +17,5 @@ export const collision:collisionType = (shipLocal, numShips,ships) => {
         }
     }
      //  console.log(shipLocal)
-    return false // пересечений кораблей не нацйдены, можно генерировать следующий корабль
+    return false // пересечений кораблей не найдены, можно генерировать следующий корабль
 }

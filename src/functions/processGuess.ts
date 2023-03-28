@@ -1,11 +1,11 @@
 import {fire} from "./fire";
 import {parseGuess} from "./parseGuess";
-import {setShipsSunkType} from "../Types/commonTypes";
+import {setShipsSunkType, ShipType} from "../Types/commonTypes";
 
 type processGuessType = (
     guess: string,
     boardSize: number,
-    ships: any,
+    ships: Array<ShipType>,
     shipsSunk: number,
     numShips: number,
     setStatus: (currentStatus:string)=>void,

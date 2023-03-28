@@ -6,10 +6,11 @@ type generateShipLocationsType = (
     numShips: number,
     ships:Array<ShipType>,
     boardSizeL: number,
-    shipLength: number
+    shipLength: number,
+    setGeneratedShip: (generatedShip: ShipType)=> void
 
 ) => void
-export const generateShipLocations:generateShipLocationsType = (numShips, ships,boardSize, shipLength) => {
+export const generateShipLocations:generateShipLocationsType = (numShips, ships,boardSize, shipLength,setGeneratedShip) => {
     //основной метод. Создает в модели массив ships с количеством
     // кораблей, определяемым свойством numShips модели
     var shipLocal: ShipType;
@@ -17,7 +18,8 @@ export const generateShipLocations:generateShipLocationsType = (numShips, ships,
         do {// выполнять в цикле
             shipLocal = generateShip(boardSize, shipLength) // сгенерировать корабль
         } while (collision(shipLocal, numShips, ships)) // пока collision не вернет false (нет пересечений)
-        console.log(shipLocal)
-        ships[i].locations = shipLocal.locations
+       // console.log(shipLocal)
+        setGeneratedShip(shipLocal) // добавить сгенерированный корабль в массив до капа
     }
+
 }
