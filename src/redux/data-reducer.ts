@@ -61,7 +61,6 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
             }
             return stateCopy; // возврат копии стейта после изменения
         case SET_SHIPS_SUNK:  // кейс увеличения количества потопленых кораблей
-            console.log("SET_SHIPS_SUNK")
             stateCopy = {
                 ...state, // копия всего стейта
                 shipsSunk: state.shipsSunk + 1

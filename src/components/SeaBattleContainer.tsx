@@ -4,25 +4,30 @@ import {GlobalStateType} from "../redux/store-redux";
 import {processGuess} from "../functions/processGuess";
 import {setShipsSunkType, ShipType} from "../Types/commonTypes";
 import {setShipsSunk, setStatus} from "../redux/data-reducer";
+import {generateShipLocations} from "../functions/generateShipLocations";
 type SeaBattleContainerType = {
     boardSize: number,
     ships:Array<ShipType>,
     shipsSunk: number,
     numShips:number,
-    setStatus:  (currentStatus:string)=>void
-    setShipsSunk: setShipsSunkType
+    setStatus:  (currentStatus:string)=>void,
+    setShipsSunk: setShipsSunkType,
+    shipLength: number
 }
-const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({boardSize, ships, shipsSunk,numShips, setStatus, setShipsSunk}) => {
+const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
+    {boardSize, ships, shipsSunk,numShips, setStatus, setShipsSunk, shipLength}
+    ) => {
     useEffect(()=>{
         console.clear()
-        processGuessLocal("A6")
+        generateShipLocations(numShips, ships,boardSize, shipLength)
+        /*processGuessLocal("A6")
         processGuessLocal("B6")
         processGuessLocal("C6")
         processGuessLocal("C4")
         processGuessLocal("D4")
         processGuessLocal("E4")
         processGuessLocal("B0")
-/*        processGuessLocal("B1")
+        processGuessLocal("B1")
         processGuessLocal("B2")*/
     },[])
 
@@ -46,14 +51,16 @@ type mapStateToPropsType = {
     boardSize: number,
     ships:Array<ShipType>,
     shipsSunk: number,
-    numShips:number
+    numShips:number,
+    shipLength: number
 }
 const mapStateToProps = (state: GlobalStateType) => {
     return {
         boardSize: state.mainData.boardSize,
         ships: state.mainData.ships,
         shipsSunk: state.mainData.shipsSunk,
-        numShips: state.mainData.numShips
+        numShips: state.mainData.numShips,
+        shipLength: state.mainData.shipLength,
     }
 }
 export default connect<
