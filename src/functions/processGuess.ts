@@ -1,5 +1,6 @@
 import {fire} from "./fire";
 import {parseGuess} from "./parseGuess";
+import {setShipsSunkType} from "../Types/commonTypes";
 
 type processGuessType = (
     guess: string,
@@ -7,18 +8,19 @@ type processGuessType = (
     ships: any,
     shipsSunk: number,
     numShips: number,
-    setStatus: (currentStatus:string)=>void
+    setStatus: (currentStatus:string)=>void,
+    setShipsSunk: setShipsSunkType
 ) => void
 
-export const processGuess:processGuessType = (guess,boardSize, ships, shipsSunk,numShips, setStatus) => {
+export const processGuess:processGuessType = (guess,boardSize, ships, shipsSunk,numShips, setStatus, setShipsSunk) => {
     // основная функция. Прроверяет корректность введенных данных выстрела, считает выстрелы, проверка конца игры
-    console.log(guess)
-    let location = parseGuess(guess, boardSize) // проверить, что введенные данные в определенных границах
+    setStatus(guess)
+    let location = parseGuess(guess, boardSize, setStatus) // проверить, что введенные данные в определенных границах
     if (location) { // если соответствует
         //this.guesses++  счетчик выстрелов увеличиваем на 1 при кореектном вводе данных выстрела
-        const hit = fire(location, ships, shipsSunk, setStatus) // стреляем по введенным координатам
+        const hit = fire(location, ships, shipsSunk, setStatus, setShipsSunk) // стреляем по введенным координатам
         if (hit && shipsSunk === numShips) { // если попали, и количество потопленных кораблей достигла порога
-            console.log("Вы потопили все корабли") // сообщение о потоплении всех кораблей
+            setStatus("Вы потопили все корабли") // сообщение о потоплении всех кораблей
         }
     }
 }

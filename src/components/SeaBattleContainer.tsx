@@ -2,27 +2,28 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {GlobalStateType} from "../redux/store-redux";
 import {processGuess} from "../functions/processGuess";
-import {ShipType} from "../Types/commonTypes";
-import {setStatus} from "../redux/data-reducer";
+import {setShipsSunkType, ShipType} from "../Types/commonTypes";
+import {setShipsSunk, setStatus} from "../redux/data-reducer";
 type SeaBattleContainerType = {
     boardSize: number,
     ships:Array<ShipType>,
     shipsSunk: number,
     numShips:number,
     setStatus:  (currentStatus:string)=>void
+    setShipsSunk: setShipsSunkType
 }
-const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({boardSize, ships, shipsSunk,numShips, setStatus}) => {
+const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({boardSize, ships, shipsSunk,numShips, setStatus, setShipsSunk}) => {
     useEffect(()=>{
         console.clear()
         processGuessLocal("A6")
-        processGuessLocal("A6")
-        processGuessLocal("A1")
+        processGuessLocal("B6")
+        processGuessLocal("C6")
     },[])
 
     type processGuessLocalType = (guess: string)  => void
         // локальная функция, принимающая только координаты выстрела
     const processGuessLocal:processGuessLocalType = (guess) => {
-        processGuess(guess, boardSize, ships, shipsSunk, numShips, setStatus)
+        processGuess(guess, boardSize, ships, shipsSunk, numShips, setStatus, setShipsSunk)
     }
 
     return <div>
@@ -32,6 +33,8 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = ({boardSize, ships,
 
 type mapDispatchToPropsType = {
     setStatus:  (currentStatus:string)=>void
+    setShipsSunk: setShipsSunkType
+
 }
 type mapStateToPropsType = {
     boardSize: number,
@@ -52,6 +55,6 @@ export default connect<
     mapDispatchToPropsType, // тип mapDispatchToProps
     unknown, // тип входящих пропсов от родителя
     GlobalStateType // глобальный стейт из стора
-    >(mapStateToProps, { setStatus
+    >(mapStateToProps, { setStatus, setShipsSunk
 })(SeaBattleContainer)
 
