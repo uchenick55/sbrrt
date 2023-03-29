@@ -5,6 +5,8 @@ import {processGuess} from "../functions/processGuess";
 import {setShipsSunkType, ShipType} from "../Types/commonTypes";
 import {setGeneratedShip, setShipsSunk, setStatus} from "../redux/data-reducer";
 import {generateShipLocations} from "../functions/generateShipLocations";
+import Preloader from "./common/Preloader";
+import SeaBattle from "./SeaBattle";
 type SeaBattleContainerType = {
     boardSize: number,
     ships:Array<ShipType>,
@@ -39,7 +41,7 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
     }
 
     return <div>
-        {shipsSunk}
+        <SeaBattle/>
     </div>
 }
 
