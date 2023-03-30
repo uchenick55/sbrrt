@@ -7,6 +7,7 @@ import {setGeneratedShip, setShipsSunk, setStatus} from "../redux/data-reducer";
 import {generateShipLocations} from "../functions/generateShipLocations";
 import Preloader from "./common/Preloader";
 import SeaBattle from "./SeaBattle";
+import {generateMainField} from "../functions/generateMainField";
 type SeaBattleContainerType = {
     boardSize: number,
     ships:Array<ShipType>,
@@ -21,8 +22,11 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
     {boardSize, ships, shipsSunk,numShips, setStatus, setShipsSunk, shipLength, setGeneratedShip}
     ) => {
     useEffect(()=>{
-        console.clear()
+       // console.clear()
         generateShipLocations(numShips, ships,boardSize, shipLength, setGeneratedShip)
+        const MainField = generateMainField(boardSize)
+        console.log(MainField)
+
         /*processGuessLocal("A6")
         processGuessLocal("B6")
         processGuessLocal("C6")
