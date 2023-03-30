@@ -1,5 +1,5 @@
 
-import {ShipType} from "../Types/commonTypes";
+import {MainFieldType, ShipType} from "../Types/commonTypes";
 
 const FIRE = "sbrrt/dataReducer/FIRE"; //константа выстрела
 
@@ -28,7 +28,18 @@ export const setShipsSunk = (): setShipsSunkActionType => { // экшн увел
     return {type: SET_SHIPS_SUNK}
 };
 
-type ActionTypes = fireActionType | setStatusActionType | setShipsSunkActionType | setGeneratedShipActionType
+
+const SET_MAIN_FIELD  = "sbrrt/dataReducer/SET_MAIN_FIELD "; //константа задания сгенерированного поля боя
+
+export type setMainFieldType  = { type: typeof SET_MAIN_FIELD, MainField: MainFieldType}
+export const setMainField = (MainField: MainFieldType): setMainFieldType => { // экшн задания сгенерированного поля боя
+    return {type: SET_MAIN_FIELD, MainField}
+};
+
+
+
+type ActionTypes = fireActionType | setStatusActionType | setShipsSunkActionType |
+    setGeneratedShipActionType | setMainFieldType
 
 type initialStateType = {
     boardSize: number,// размер клеток поля
@@ -36,7 +47,8 @@ type initialStateType = {
     shipLength: number, //длина кораблей
     shipsSunk: number, // сколько кораблей уже потоплено
     ships:Array<ShipType>,
-    currentStatus: string
+    currentStatus: string,
+    MainField: MainFieldType
 
 }
 const initialState: initialStateType = { //стейт по умолчанию
@@ -45,7 +57,9 @@ const initialState: initialStateType = { //стейт по умолчанию
     shipLength: 3,//длина кораблей
     shipsSunk:0, // сколько кораблей уже потоплено
     ships: [], // данные по кораблям (положение на поле и массивы попаданий)
-    currentStatus: ""
+    currentStatus: "",
+    // @ts-ignore
+    MainField: null
 }
 
 const dataReducer = (state: initialStateType = initialState, action: ActionTypes): initialStateType => {//редьюсер
@@ -75,6 +89,13 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
             stateCopy = {
                 ...state, // копия всего стейта
                 ships: [...state.ships,action.generatedShip] // добавление новых сгенерированных кораблей
+            }
+            return stateCopy; // возврат копии стейта после изменения
+        case SET_MAIN_FIELD:  // кейс задания сгенерированного поля боя
+           // console.log(action.MainField )
+            stateCopy = {
+                ...state, // копия всего стейта
+                MainField: action.MainField
             }
             return stateCopy; // возврат копии стейта после изменения
         default:

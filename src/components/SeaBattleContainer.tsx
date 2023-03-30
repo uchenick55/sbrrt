@@ -2,8 +2,8 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {GlobalStateType} from "../redux/store-redux";
 import {processGuess} from "../functions/processGuess";
-import {setShipsSunkType, ShipType} from "../Types/commonTypes";
-import {setGeneratedShip, setShipsSunk, setStatus} from "../redux/data-reducer";
+import {MainFieldType, setShipsSunkType, ShipType} from "../Types/commonTypes";
+import {setGeneratedShip, setMainField, setShipsSunk, setStatus} from "../redux/data-reducer";
 import {generateShipLocations} from "../functions/generateShipLocations";
 import Preloader from "./common/Preloader";
 import SeaBattle from "./SeaBattle";
@@ -16,17 +16,18 @@ type SeaBattleContainerType = {
     setStatus:  (currentStatus:string)=>void,
     setShipsSunk: setShipsSunkType,
     shipLength: number
-    setGeneratedShip: (generatedShip: ShipType)=> void
+    setGeneratedShip: (generatedShip: ShipType)=> void,
+    setMainField: (MainField: MainFieldType)=> void
 }
 const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
-    {boardSize, ships, shipsSunk,numShips, setStatus, setShipsSunk, shipLength, setGeneratedShip}
+    {boardSize, ships, shipsSunk,numShips, setStatus,
+        setShipsSunk, shipLength, setGeneratedShip, setMainField}
     ) => {
     useEffect(()=>{
        // console.clear()
         generateShipLocations(numShips, ships,boardSize, shipLength, setGeneratedShip)
         const MainField = generateMainField(boardSize)
-        console.log(MainField)
-
+        setMainField(MainField)
         /*processGuessLocal("A6")
         processGuessLocal("B6")
         processGuessLocal("C6")
@@ -69,12 +70,13 @@ type mapDispatchToPropsType = {
     setStatus:  (currentStatus:string)=>void
     setShipsSunk: setShipsSunkType
     setGeneratedShip: (generatedShip: ShipType)=> void
+    setMainField: (MainField: MainFieldType)=> void
 }
 export default connect<
     mapStateToPropsType, // тип mapStateToProps
     mapDispatchToPropsType, // тип mapDispatchToProps
     unknown, // тип входящих пропсов от родителя
     GlobalStateType // глобальный стейт из стора
-    >(mapStateToProps, { setStatus, setShipsSunk, setGeneratedShip
+    >(mapStateToProps, { setStatus, setShipsSunk, setGeneratedShip, setMainField
 })(SeaBattleContainer)
 
