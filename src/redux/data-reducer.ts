@@ -52,7 +52,7 @@ type initialStateType = {
 
 }
 const initialState: initialStateType = { //стейт по умолчанию
-    boardSize:3,// размер клеток поля
+    boardSize:7,// размер клеток поля
     numShips: 3,// количество кораблей
     shipLength: 3,//длина кораблей
     shipsSunk:0, // сколько кораблей уже потоплено
