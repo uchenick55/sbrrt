@@ -9,4 +9,4 @@ type CellType = { // ячейка поля игры
     y: number,
     cellStatus: string
 }
-export type MainFieldType = Array<Array<CellType>> | null // все поле игры из ячеек
+export type MainFieldType = Array<Array<CellType>> // все поле игры из ячеек

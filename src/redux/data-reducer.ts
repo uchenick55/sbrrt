@@ -52,14 +52,274 @@ type initialStateType = {
 
 }
 const initialState: initialStateType = { //стейт по умолчанию
-    boardSize:7,// размер клеток поля
+    boardSize:3,// размер клеток поля
     numShips: 3,// количество кораблей
     shipLength: 3,//длина кораблей
     shipsSunk:0, // сколько кораблей уже потоплено
     ships: [], // данные по кораблям (положение на поле и массивы попаданий)
     currentStatus: "",
     // @ts-ignore
-    MainField: null
+    MainField: []/*
+        [
+            {
+                "x": 0,
+                "y": 0,
+                "cellStatus": ""
+            },
+            {
+                "x": 1,
+                "y": 0,
+                "cellStatus": ""
+            },
+            {
+                "x": 2,
+                "y": 0,
+                "cellStatus": ""
+            },
+            {
+                "x": 3,
+                "y": 0,
+                "cellStatus": ""
+            },
+            {
+                "x": 4,
+                "y": 0,
+                "cellStatus": ""
+            },
+            {
+                "x": 5,
+                "y": 0,
+                "cellStatus": ""
+            },
+            {
+                "x": 6,
+                "y": 0,
+                "cellStatus": ""
+            }
+        ],
+        [
+            {
+                "x": 0,
+                "y": 1,
+                "cellStatus": ""
+            },
+            {
+                "x": 1,
+                "y": 1,
+                "cellStatus": ""
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "cellStatus": ""
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "cellStatus": ""
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "cellStatus": ""
+            },
+            {
+                "x": 5,
+                "y": 1,
+                "cellStatus": ""
+            },
+            {
+                "x": 6,
+                "y": 1,
+                "cellStatus": ""
+            }
+        ],
+        [
+            {
+                "x": 0,
+                "y": 2,
+                "cellStatus": ""
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "cellStatus": ""
+            },
+            {
+                "x": 2,
+                "y": 2,
+                "cellStatus": ""
+            },
+            {
+                "x": 3,
+                "y": 2,
+                "cellStatus": ""
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "cellStatus": ""
+            },
+            {
+                "x": 5,
+                "y": 2,
+                "cellStatus": ""
+            },
+            {
+                "x": 6,
+                "y": 2,
+                "cellStatus": ""
+            }
+        ],
+        [
+            {
+                "x": 0,
+                "y": 3,
+                "cellStatus": ""
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "cellStatus": ""
+            },
+            {
+                "x": 2,
+                "y": 3,
+                "cellStatus": ""
+            },
+            {
+                "x": 3,
+                "y": 3,
+                "cellStatus": ""
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "cellStatus": ""
+            },
+            {
+                "x": 5,
+                "y": 3,
+                "cellStatus": ""
+            },
+            {
+                "x": 6,
+                "y": 3,
+                "cellStatus": ""
+            }
+        ],
+        [
+            {
+                "x": 0,
+                "y": 4,
+                "cellStatus": ""
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "cellStatus": ""
+            },
+            {
+                "x": 2,
+                "y": 4,
+                "cellStatus": ""
+            },
+            {
+                "x": 3,
+                "y": 4,
+                "cellStatus": ""
+            },
+            {
+                "x": 4,
+                "y": 4,
+                "cellStatus": ""
+            },
+            {
+                "x": 5,
+                "y": 4,
+                "cellStatus": ""
+            },
+            {
+                "x": 6,
+                "y": 4,
+                "cellStatus": ""
+            }
+        ],
+        [
+            {
+                "x": 0,
+                "y": 5,
+                "cellStatus": ""
+            },
+            {
+                "x": 1,
+                "y": 5,
+                "cellStatus": ""
+            },
+            {
+                "x": 2,
+                "y": 5,
+                "cellStatus": ""
+            },
+            {
+                "x": 3,
+                "y": 5,
+                "cellStatus": ""
+            },
+            {
+                "x": 4,
+                "y": 5,
+                "cellStatus": ""
+            },
+            {
+                "x": 5,
+                "y": 5,
+                "cellStatus": ""
+            },
+            {
+                "x": 6,
+                "y": 5,
+                "cellStatus": ""
+            }
+        ],
+        [
+            {
+                "x": 0,
+                "y": 6,
+                "cellStatus": ""
+            },
+            {
+                "x": 1,
+                "y": 6,
+                "cellStatus": ""
+            },
+            {
+                "x": 2,
+                "y": 6,
+                "cellStatus": ""
+            },
+            {
+                "x": 3,
+                "y": 6,
+                "cellStatus": ""
+            },
+            {
+                "x": 4,
+                "y": 6,
+                "cellStatus": ""
+            },
+            {
+                "x": 5,
+                "y": 6,
+                "cellStatus": ""
+            },
+            {
+                "x": 6,
+                "y": 6,
+                "cellStatus": ""
+            }
+        ]*/
+
 }
 
 const dataReducer = (state: initialStateType = initialState, action: ActionTypes): initialStateType => {//редьюсер
@@ -92,7 +352,7 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
             }
             return stateCopy; // возврат копии стейта после изменения
         case SET_MAIN_FIELD:  // кейс задания сгенерированного поля боя
-           // console.log(action.MainField )
+            console.log(action.MainField )
             stateCopy = {
                 ...state, // копия всего стейта
                 MainField: action.MainField

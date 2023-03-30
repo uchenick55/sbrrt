@@ -1,8 +1,8 @@
 body {
-    /*background-color: black;*/
+    background-color: greenyellow;
 }
 
-div#board {
+.mainBoard {
     position: relative;
     width: 1024px;
     height: 863px;
@@ -17,17 +17,20 @@ div#board {
     color: rgb(83, 175, 19);
 }
 
-.tableClass {
+.FieldClass {
     position: absolute;
     left: 168px;
     top: 95px;
+    border: 2px solid blue;
 
 }
 
-.tdClass {
-    width: 93px;
-    height: 93px;
+.cellClass {
+    position: absolute;
     background: #98CF71;
+    border: 2px solid red;
+    width: 100px;
+    height: 100px;
 }
 
 form {

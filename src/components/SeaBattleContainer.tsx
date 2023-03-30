@@ -18,25 +18,16 @@ type SeaBattleContainerType = {
     shipLength: number
     setGeneratedShip: (generatedShip: ShipType)=> void,
     setMainField: (MainField: MainFieldType)=> void
+    MainField: MainFieldType
 }
 const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
     {boardSize, ships, shipsSunk,numShips, setStatus,
-        setShipsSunk, shipLength, setGeneratedShip, setMainField}
+        setShipsSunk, shipLength, setGeneratedShip, setMainField, MainField}
     ) => {
+
     useEffect(()=>{
-       // console.clear()
-        generateShipLocations(numShips, ships,boardSize, shipLength, setGeneratedShip)
-        const MainField = generateMainField(boardSize)
-        setMainField(MainField)
-        /*processGuessLocal("A6")
-        processGuessLocal("B6")
-        processGuessLocal("C6")
-        processGuessLocal("C4")
-        processGuessLocal("D4")
-        processGuessLocal("E4")
-        processGuessLocal("B0")
-        processGuessLocal("B1")
-        processGuessLocal("B2")*/
+        setMainField(generateMainField(boardSize)) // сгенерировать пустое поле боя
+        generateShipLocations(numShips, ships,boardSize, shipLength, setGeneratedShip)// сгенерировать положение кораблей
     },[])
 
     type processGuessLocalType = (guess: string)  => void
@@ -46,7 +37,7 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
     }
 
     return <div>
-        <SeaBattle/>
+        <SeaBattle MainField={MainField}/>
     </div>
 }
 
@@ -55,7 +46,8 @@ type mapStateToPropsType = {
     ships:Array<ShipType>,
     shipsSunk: number,
     numShips:number,
-    shipLength: number
+    shipLength: number,
+    MainField: MainFieldType
 }
 const mapStateToProps = (state: GlobalStateType) => {
     return {
@@ -64,6 +56,7 @@ const mapStateToProps = (state: GlobalStateType) => {
         shipsSunk: state.mainData.shipsSunk,
         numShips: state.mainData.numShips,
         shipLength: state.mainData.shipLength,
+        MainField: state.mainData.MainField
     }
 }
 type mapDispatchToPropsType = {
