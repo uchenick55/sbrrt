@@ -1,3 +1,5 @@
+import {alphaBet} from "../components/common/constants";
+
 type parseGuessType = (
     guess: string,
     boardSize: number,
@@ -6,7 +8,6 @@ type parseGuessType = (
 
 export const parseGuess:parseGuessType = (guess, boardSize, setStatus ) => {
     // проверяем, что введенные данные попытки выстрела корректны и в пределах поля
-    const alphaBet = ["A", "B", "C", "D", "E", "F", "G"]; // поля по буквам
     if (guess === null || guess.length !== 2) { // если ввод пустой, или длина не равна 2 символам
         setStatus("Некорректный ввод. (A-G, 0-6)") // вывод ошибки
     } else { // если проверку прошли

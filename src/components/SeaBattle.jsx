@@ -1,5 +1,6 @@
 import React from "react";
 import classes from './seaBattle.module.css'
+import {alphaBet} from "./common/constants";
 
 const SeaBattle = ({MainField}) => {
 
@@ -17,10 +18,14 @@ const SeaBattle = ({MainField}) => {
                         id={id}
                         style={{
                             left: `${cell.x*96}px`,/*шаг ячеек по горизонтали*/
-                            top: `${cell.y*96}px`,/*шаг ячеек по вертикали*/
+                            top: `${alphaBet.indexOf(cell.y)*96}px`,/*шаг ячеек по вертикали*/
                         }}
                        // className={classes.cellCommon} //остальные классы
-                        className={`${classes.cellCommon} ${cell.cellStatus === "" ? "" : cell.cellStatus === "hit"? classes.hit: classes.miss}`}
+                        className={
+                            `${classes.cellCommon} ${cell.cellStatus === "" // склеиваем общий класс и уловие пустого cell.cellStatus
+                                ? "" : cell.cellStatus === "hit" // если да то ничего не добьавляем, иначе условие на hit
+                                    ? classes.hit: classes.miss}` // если да то класс hit, иначе класс miss
+                        }
                         onClick={()=>{
                             localOnClick(cell.y, cell.x)
                         }}

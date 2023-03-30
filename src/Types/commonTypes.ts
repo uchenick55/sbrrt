@@ -6,7 +6,7 @@ export type setShipsSunkType =  () => void
 
 type CellType = { // ячейка поля игры
     x: number,
-    y: number,
+    y: string,
     cellStatus: string
 }
 export type MainFieldType = Array<Array<CellType>> // все поле игры из ячеек
