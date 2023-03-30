@@ -24,9 +24,9 @@ body {
 
 }
 
-.cellClass {
-    position: absolute;
+.cellCommon {
     background: #98CF71;
+    position: absolute;
     width: 94px; /*размеры самой ячейки по горизонтали*/
     height: 94px;/*размеры самой ячейки по вертикали*/
 }
@@ -47,8 +47,10 @@ form {
 
 .hit {
     background: url("./ship.png") no-repeat center center;
+
 }
 
 .miss {
     background: url("./miss.png") no-repeat center center;
+
 }

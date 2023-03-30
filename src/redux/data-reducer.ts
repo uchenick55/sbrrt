@@ -59,7 +59,7 @@ const initialState: initialStateType = { //стейт по умолчанию
     ships: [], // данные по кораблям (положение на поле и массивы попаданий)
     currentStatus: "",
     // @ts-ignore
-    MainField: []/*
+    MainField: [
         [
             {
                 "x": 0,
@@ -311,14 +311,14 @@ const initialState: initialStateType = { //стейт по умолчанию
             {
                 "x": 5,
                 "y": 6,
-                "cellStatus": ""
+                "cellStatus": "miss"
             },
             {
                 "x": 6,
                 "y": 6,
-                "cellStatus": ""
+                "cellStatus": "hit"
             }
-        ]*/
+        ]]
 
 }
 
@@ -355,7 +355,7 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
             console.log(action.MainField )
             stateCopy = {
                 ...state, // копия всего стейта
-                MainField: action.MainField
+             //   MainField: action.MainField
             }
             return stateCopy; // возврат копии стейта после изменения
         default:

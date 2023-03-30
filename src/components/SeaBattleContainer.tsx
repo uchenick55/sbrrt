@@ -28,6 +28,7 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
     useEffect(()=>{
         setMainField(generateMainField(boardSize)) // сгенерировать пустое поле боя
         generateShipLocations(numShips, ships,boardSize, shipLength, setGeneratedShip)// сгенерировать положение кораблей
+        processGuessLocal("01")
     },[])
 
     type processGuessLocalType = (guess: string)  => void
@@ -37,6 +38,9 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
     }
 
     return <div>
+        {/*<img src="./miss.png"/>*/}
+        {/*<img src="ship.png"/>*/}
+
         <SeaBattle MainField={MainField}/>
     </div>
 }
