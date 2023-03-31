@@ -52,7 +52,7 @@ type initialStateType = {
 
 }
 const initialState: initialStateType = { //стейт по умолчанию
-    boardSize:7,// размер клеток поля
+    boardSize:3,// размер клеток поля
     numShips: 3,// количество кораблей
     shipLength: 3,//длина кораблей
     shipsSunk:0, // сколько кораблей уже потоплено
@@ -93,7 +93,7 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
             }
             return stateCopy; // возврат копии стейта после изменения
         case SET_MAIN_FIELD:  // кейс задания сгенерированного поля боя
-            console.log(action.MainField )
+          //  console.log(action.MainField )
             stateCopy = {
                 ...state, // копия всего стейта
                 MainField: action.MainField
