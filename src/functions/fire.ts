@@ -5,10 +5,11 @@ type fireType = (
     guess: string,
     ships:Array<ShipType>,
     setStatus: (currentStatus:string)=>void,
-    setShipsSunk: setShipsSunkType
+    setShipsSunk: setShipsSunkType,
+    setShips: (ships:Array<ShipType>)=> void
 ) => boolean
 
-export const fire:fireType = (guess, ships, setStatus, setShipsSunk) => {
+export const fire:fireType = (guess, ships, setStatus, setShipsSunk, setShips) => {
     // проверка попадания по выбранному полю
     for (let i = 0; i < ships.length; i++) { // пробегаем массив ships
         const ship = ships[i]; // получить данные по текущему кораблю
@@ -18,9 +19,12 @@ export const fire:fireType = (guess, ships, setStatus, setShipsSunk) => {
                 setStatus("В эту палубу уже попали!")
                 return false // прервать выполнение функции
             }
-            ship.hits[locationIndex] = "hit"; // присвоить соответствующему полю hits
+            const shipsLocal = JSON.parse(JSON.stringify(ships)) // полная копия массива ships
+            shipsLocal[i].hits[locationIndex] = "hit"// присвоить соответствующему полю hits
+            console.log(shipsLocal)
+            setShips(shipsLocal)
             setStatus("HIT")
-            if (isSunk(ship)) { // если корабль потоплен (вернет true)
+            if (isSunk(shipsLocal[i])) { // если корабль потоплен (вернет true)
                 setStatus("You sank my battleship!")
                 setShipsSunk(); // увеличиваем счетчик потопленых корабелей на 1
             }

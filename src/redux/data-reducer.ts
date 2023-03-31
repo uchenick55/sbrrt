@@ -1,11 +1,11 @@
 
 import {MainFieldType, ShipType} from "../Types/commonTypes";
 
-const FIRE = "sbrrt/dataReducer/FIRE"; //константа выстрела
+const SET_SHIPS = "sbrrt/dataReducer/SET_SHIPS"; //константа выстрела
 
-export type fireActionType = { type: typeof FIRE, guess: string}
-export const setFire = (guess: string): fireActionType => { // экшн получения данных выстрела
-    return {type: FIRE, guess}
+export type setShipsActionType = { type: typeof SET_SHIPS, ships:Array<ShipType>}
+export const setShips = (ships:Array<ShipType>): setShipsActionType => { // экшн получения данных выстрела
+    return {type: SET_SHIPS, ships}
 };
 
 const SET_GENERATED_SHIP  = "sbrrt/dataReducer/SET_GENERATED_SHIPS "; //константа задания сгенерированного корабля
@@ -36,9 +36,7 @@ export const setMainField = (MainField: MainFieldType): setMainFieldType => { //
     return {type: SET_MAIN_FIELD, MainField}
 };
 
-
-
-type ActionTypes = fireActionType | setStatusActionType | setShipsSunkActionType |
+type ActionTypes = setShipsActionType | setStatusActionType | setShipsSunkActionType |
     setGeneratedShipActionType | setMainFieldType
 
 type initialStateType = {
@@ -66,10 +64,11 @@ const initialState: initialStateType = { //стейт по умолчанию
 const dataReducer = (state: initialStateType = initialState, action: ActionTypes): initialStateType => {//редьюсер
     let stateCopy: initialStateType; // объявлениечасти части стейта до изменения редьюсером
     switch (action.type) {
-        case FIRE:  // кейс задания ошибок формы
-            //console.log("FIRE!", action.guess)
+        case SET_SHIPS:  // кейс задания ошибок формы
+          //  console.log("SET_SHIPS!", action.ships)
             stateCopy = {
                 ...state, // копия всего стейта
+                ships: action.ships,
             }
             return stateCopy; // возврат копии стейта после изменения
         case SET_STATUS:  // кейс задания статуса игры

@@ -8,7 +8,7 @@ type collisionType = (
 export const collision:collisionType = (shipLocal, numShips, shipsLocal1) => {
     // метод получает один корабль и проверяет, что тот не перекрывается с кораблями,
     // уже находящимися на игровом поле.
-    console.log(shipLocal)
+    //console.log(shipLocal)
     for (let i = 0; i< numShips; i++) { // пробегаем все корабли
         const ship = shipsLocal1[i];
         for (let j = 0; j< shipLocal.locations.length; j++) {

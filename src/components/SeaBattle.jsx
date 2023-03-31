@@ -2,12 +2,14 @@ import React from "react";
 import classes from './seaBattle.module.css'
 import {alphaBet} from "./common/constants";
 
-const SeaBattle = ({MainField}) => {
+const SeaBattle = ({MainField, processGuessLocal, currentStatus}) => {
 
     const localOnClick = (cellY, cellX) => {
         console.log(cellY  + "" + cellX)
+        processGuessLocal(cellY  + "" + cellX)
     }
     return <div className={classes.mainBoard}>
+        <div className={classes.messageArea} >{currentStatus}</div>
 
         <div className={classes.FieldClass}>
             {MainField.map(m=>{
