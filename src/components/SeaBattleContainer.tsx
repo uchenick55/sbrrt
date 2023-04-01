@@ -45,7 +45,8 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
         // локальная функция, принимающая только координаты выстрела
     const processGuessLocal:processGuessLocalType = (guess) => {
         setGuess(guess)
-        processGuess(guess, boardSize, ships, shipsSunk, numShips, setStatus, setShipsSunk, setShips)
+        processGuess(guess, boardSize, ships, shipsSunk, numShips, setStatus, setShipsSunk, setShips,
+            MainField, setMainField)
     }
 
     return <div>
