@@ -27,6 +27,12 @@ export type setShipsSunkActionType = { type: typeof SET_SHIPS_SUNK}
 export const setShipsSunk = (): setShipsSunkActionType => { // экшн увеличения количества потопленых кораблей
     return {type: SET_SHIPS_SUNK}
 };
+const SET_GUESS = "sbrrt/dataReducer/SET_GUESS"; //константа задания выстрела
+
+export type setGuessType = { type: typeof SET_GUESS, guess: string}
+export const setGuess = (guess: string): setGuessType => { // экшн задания выстрела
+    return {type: SET_GUESS, guess}
+};
 
 
 const SET_MAIN_FIELD  = "sbrrt/dataReducer/SET_MAIN_FIELD "; //константа задания сгенерированного поля боя
@@ -37,7 +43,7 @@ export const setMainField = (MainField: MainFieldType): setMainFieldType => { //
 };
 
 type ActionTypes = setShipsActionType | setStatusActionType | setShipsSunkActionType |
-    setGeneratedShipActionType | setMainFieldType
+    setGeneratedShipActionType | setMainFieldType | setGuessType
 
 type initialStateType = {
     boardSize: number,// размер клеток поля
@@ -47,7 +53,7 @@ type initialStateType = {
     ships:Array<ShipType>,
     currentStatus: string,
     MainField: MainFieldType
-
+    guess: string
 }
 const initialState: initialStateType = { //стейт по умолчанию
     boardSize:3,// размер клеток поля
@@ -57,8 +63,8 @@ const initialState: initialStateType = { //стейт по умолчанию
     ships: [], // данные по кораблям (положение на поле и массивы попаданий)
     currentStatus: "",
     // @ts-ignore
-    MainField: []
-
+    MainField: [],
+    guess: ""
 }
 
 const dataReducer = (state: initialStateType = initialState, action: ActionTypes): initialStateType => {//редьюсер
@@ -96,6 +102,13 @@ const dataReducer = (state: initialStateType = initialState, action: ActionTypes
             stateCopy = {
                 ...state, // копия всего стейта
                 MainField: action.MainField
+            }
+            return stateCopy; // возврат копии стейта после изменения
+        case SET_GUESS:  // кейс задания выстрела
+          //  console.log(action.MainField )
+            stateCopy = {
+                ...state, // копия всего стейта
+                guess: action.guess
             }
             return stateCopy; // возврат копии стейта после изменения
         default:
