@@ -10,3 +10,5 @@ type CellType = { // ячейка поля игры
     cellStatus: string
 }
 export type MainFieldType = Array<Array<CellType>> // все поле игры из ячеек
+
+export type processGuessLocalType = (guess: string)  => void

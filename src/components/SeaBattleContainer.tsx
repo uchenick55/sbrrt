@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {GlobalStateType} from "../redux/store-redux";
 import {processGuess} from "../functions/processGuess";
-import {MainFieldType, setShipsSunkType, ShipType} from "../Types/commonTypes";
+import {MainFieldType, processGuessLocalType, setShipsSunkType, ShipType} from "../Types/commonTypes";
 import {setShips, setGeneratedShip, setMainField, setShipsSunk, setStatus, setGuess} from "../redux/data-reducer";
 import {generateShipLocations} from "../functions/generateShipLocations";
 import Preloader from "./common/Preloader";
@@ -41,7 +41,6 @@ const SeaBattleContainer: React.FC<SeaBattleContainerType> = (
         }
     }, [shipsSunk, numShips ])
 
-    type processGuessLocalType = (guess: string)  => void
         // локальная функция, принимающая только координаты выстрела
     const processGuessLocal:processGuessLocalType = (guess) => {
         setGuess(guess)

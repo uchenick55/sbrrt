@@ -1,10 +1,16 @@
 import React from "react";
 import classes from './seaBattle.module.css'
 import {alphaBet} from "./common/constants";
+import {MainFieldType, processGuessLocalType} from "../Types/commonTypes";
 
-const SeaBattle = ({MainField, processGuessLocal, currentStatus}) => {
+type SeaBattleType = {
+    MainField: MainFieldType
+    processGuessLocal: processGuessLocalType,
+    currentStatus: string
+}
+const SeaBattle: React.FC<SeaBattleType> = ({MainField, processGuessLocal, currentStatus}) => {
 
-    const localOnClick = (cellY, cellX) => {
+    const localOnClick = (cellY: string, cellX: number) => {
       //  console.log(cellY  + "" + cellX)
         processGuessLocal(cellY  + "" + cellX)
     }
@@ -22,7 +28,6 @@ const SeaBattle = ({MainField, processGuessLocal, currentStatus}) => {
                             left: `${cell.x*96}px`,/*шаг ячеек по горизонтали*/
                             top: `${alphaBet.indexOf(cell.y)*96}px`,/*шаг ячеек по вертикали*/
                         }}
-                       // className={classes.cellCommon} //остальные классы
                         className={
                             `${classes.cellCommon} ${cell.cellStatus === "" // склеиваем общий класс и уловие пустого cell.cellStatus
                                 ? "" : cell.cellStatus === "hit" // если да то ничего не добьавляем, иначе условие на hit
@@ -32,9 +37,6 @@ const SeaBattle = ({MainField, processGuessLocal, currentStatus}) => {
                             localOnClick(cell.y, cell.x)
                         }}
                     >
-        {/*<img src="miss.png" alt=""/>*/}
-        {/*<img src="ship.png" alt=""/>*/}
-                    {/*    {id}*/}
                     </span>
                 })
             })}
